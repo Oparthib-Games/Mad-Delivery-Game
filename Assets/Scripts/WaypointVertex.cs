@@ -8,11 +8,10 @@ public class WaypointVertex : MonoBehaviour
 {
     [SerializeField] private GameObject[] connectedVertex;
 
-    [SerializeField] private LineRenderer[] connectedLineRenderers;
 
     [SerializeField] private Color edgeColor = Color.cyan;
-    [SerializeField] private bool useRandomColor = true;
-    [SerializeField] private bool hideMyEdge;
+    public bool useRandomColor = true;
+    public bool hideMyEdge;
 
     void Start()
     {

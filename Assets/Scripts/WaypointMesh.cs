@@ -10,6 +10,9 @@ public class WaypointMesh : MonoBehaviour
     [SerializeField] private LineRenderer mainLineRenderer;
     [SerializeField] private GameObject[] vertices;
 
+    public int startNode = 2;
+    public int endNode = 13;
+
 
     // Our graph supposed to be like this
     int[,] graphDemo = new int[,]
@@ -101,15 +104,12 @@ public class WaypointMesh : MonoBehaviour
     [ContextMenu("Find Shortest Route")]
     public void FindShortestRoute()
     {
-
-        int startNode = 2;
-        int endNode = 13;
-
         List<int> shortestPath = DijkstraAlgorithm(graph, startNode, endNode);
         int shortestDist = FindShortestRouteDistance(shortestPath);
+        DisplayPath(shortestPath);
 
         string shortestRouteVisualize = "Shortest Route [Click Here]\n";
-        shortestRouteVisualize = $"{shortestRouteVisualize} Shortest distance between {startNode} to {endNode} is {shortestDist}\n";
+        shortestRouteVisualize = $"{shortestRouteVisualize}Shortest distance between {startNode} to {endNode} is {shortestDist}\n";
         foreach (int node in shortestPath)
         {
             shortestRouteVisualize = $"{shortestRouteVisualize} {node}  ";
@@ -133,6 +133,21 @@ public class WaypointMesh : MonoBehaviour
         }
 
         return distance;
+    }
+
+    void DisplayPath(List<int> shortestPath)
+    {
+        GameObject lineRendererGO = Instantiate(mainLineRenderer.gameObject, transform.position, Quaternion.identity) as GameObject;
+
+        LineRenderer lineRenderer = lineRendererGO.GetComponent<LineRenderer>();
+        lineRenderer.positionCount = shortestPath.Count;
+
+        for (int i = 0; i < shortestPath.Count; i++)
+        {
+            GameObject vertex = vertices[shortestPath[i]];
+
+            lineRenderer.SetPosition(i, vertex.transform.position);
+        }
     }
 
     public static List<int> DijkstraAlgorithm(int[,] graph, int startNode, int endNode)
