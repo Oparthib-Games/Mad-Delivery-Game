@@ -10,6 +10,8 @@ public class WaypointMesh : MonoBehaviour
     [SerializeField] private LineRenderer mainLineRenderer;
     [SerializeField] private GameObject[] vertices;
 
+    GameObject displayLineRendererGO;
+
     public int startNode = 2;
     public int endNode = 13;
 
@@ -137,9 +139,12 @@ public class WaypointMesh : MonoBehaviour
 
     void DisplayPath(List<int> shortestPath)
     {
-        GameObject lineRendererGO = Instantiate(mainLineRenderer.gameObject, transform.position, Quaternion.identity) as GameObject;
+        if (displayLineRendererGO != null)
+            DestroyImmediate(displayLineRendererGO);
 
-        LineRenderer lineRenderer = lineRendererGO.GetComponent<LineRenderer>();
+        displayLineRendererGO = Instantiate(mainLineRenderer.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
+
+        LineRenderer lineRenderer = displayLineRendererGO.GetComponent<LineRenderer>();
         lineRenderer.positionCount = shortestPath.Count;
 
         for (int i = 0; i < shortestPath.Count; i++)
