@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (!gameManager.isGameStarted) return;
+
         Movement();
         UpdateAnimation();
     }
