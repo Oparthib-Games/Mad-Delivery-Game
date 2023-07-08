@@ -9,9 +9,12 @@ public class Player : MonoBehaviour
 
     Animator ANIM;
 
+    GameManager gameManager;
+
     void Start()
     {
         ANIM = GetComponent<Animator>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void Update()
@@ -29,5 +32,13 @@ public class Player : MonoBehaviour
     void UpdateAnimation()
     {
         ANIM.SetFloat("Lean", InputManager.H);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Coin")
+        {
+            gameManager.onCoinCollide(other.gameObject);
+        }
     }
 }
