@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (!gameManager.isGameStarted) return;
+        if (!gameManager.isGameStarted || gameManager.isGameOver) return;
 
         Movement();
         UpdateAnimation();
@@ -41,6 +41,15 @@ public class Player : MonoBehaviour
         if(other.gameObject.tag == "Coin")
         {
             gameManager.onCoinCollide(other.gameObject);
+        }
+        if(other.gameObject.tag == "Lane Trigger")
+        {
+            Destroy(other.gameObject);
+            gameManager.SpawnLane();
+        }
+        if(other.gameObject.tag == "Obstacle" || other.gameObject.tag == "Car")
+        {
+            gameManager.GameOver();
         }
     }
 }

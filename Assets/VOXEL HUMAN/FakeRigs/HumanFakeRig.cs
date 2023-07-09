@@ -131,7 +131,9 @@ public class HumanFakeRig : MonoBehaviour
 
     public void Update()
     {
-        if (EditorApplication.isPlaying) return;
+#if UNITY_EDITOR
+            if (EditorApplication.isPlaying) return;
+#endif
         if (rigStatus == RigStatusOptions.NOT_INITIALIZED) return;
 
         //updateFingers(l_fingerCtrl.LV1_L_Fingers, l_fingerCtrl.LV_1_Finger_Rotation);
@@ -159,7 +161,11 @@ public class HumanFakeRig : MonoBehaviour
         if (foundGO == null)
             Debug.LogError($"{name} NOT FOUND!!");
         else
+        {
+#if UNITY_EDITOR
             Selection.activeGameObject = foundGO;
+#endif
+        }
     }
 
     [ContextMenu("RESET A POSE")]

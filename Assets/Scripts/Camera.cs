@@ -27,9 +27,9 @@ public class Camera : MonoBehaviour
     {
         Vector3 desiredPosition = new Vector3(transform.position.x + offset.x, transform.position.y, player.position.z + offset.z);
 
-        //Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-        //transform.position = smoothedPosition;
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+        transform.position = smoothedPosition;
 
-        transform.position = desiredPosition;
+        //transform.position = desiredPosition;
     }
 }
