@@ -6,14 +6,21 @@ public class Player : MonoBehaviour
 {
     public float forwardSpeed = 5f;
     public float sideSpeed = 5f;
+    public float slideSpeed = 5f;
+    public float slopeJumpForce = 5f;
 
     Animator ANIM;
+    Rigidbody RB;
 
     GameManager gameManager;
+
+    bool isSliding;
+    bool isJumped;
 
     void Start()
     {
         ANIM = GetComponent<Animator>();
+        RB = GetComponent<Rigidbody>();
         gameManager = FindObjectOfType<GameManager>();
     }
 
@@ -22,6 +29,7 @@ public class Player : MonoBehaviour
         if (!gameManager.isGameStarted || gameManager.isGameOver) return;
 
         Movement();
+        Slide();
         UpdateAnimation();
     }
 
@@ -50,6 +58,32 @@ public class Player : MonoBehaviour
         if(other.gameObject.tag == "Obstacle" || other.gameObject.tag == "Car")
         {
             gameManager.GameOver();
+        }
+        if (other.gameObject.tag == "Slope")
+        {
+            SlopeJump();
+        }
+    }
+
+    void Slide()
+    {
+        if (InputManager.slidePerformed && !isSliding)
+        {
+            isSliding = true;
+            ANIM.SetTrigger("Slide");
+        }
+    }
+    public void SlideEndAnimEvent()
+    {
+        isSliding = false;
+    }
+    void SlopeJump()
+    {
+        if(!isJumped)
+        {
+            Debug.Log("SlopeJump");
+            RB.AddForce(new Vector3(0, 1, 1) * slopeJumpForce);
+            isJumped = true;
         }
     }
 }

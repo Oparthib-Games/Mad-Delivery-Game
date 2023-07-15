@@ -8,6 +8,7 @@ public class InputManager : MonoBehaviour
     public static Vector2 wasd;
     public static float H; // Horizontal
     public static float V; //Vertical
+    public static bool slidePerformed;
 
     PlayerInputActions inputActions;
 
@@ -20,6 +21,9 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
         HandleWASDInput();
+        HandleSlideTrigger();
+
+        Debug.Log(slidePerformed);
     }
     private void HandleWASDInput()
     {
@@ -31,6 +35,10 @@ public class InputManager : MonoBehaviour
 
     private void HandleAttackInput()
     {
-        //isAttack = playerInputActions.PlayerInputMap.Attack.phase == UnityEngine.InputSystem.InputActionPhase.Performed;
+        //isAttack = inputActions.Player.Attack.phase == UnityEngine.InputSystem.InputActionPhase.Performed;
+    }
+    private void HandleSlideTrigger()
+    {
+        slidePerformed = inputActions.Player.Slide.phase == UnityEngine.InputSystem.InputActionPhase.Performed;
     }
 }
