@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject coinParticle;
     public AudioClip coinSound;
+    public GameObject boosterParticle;
+    public AudioClip boosterSound;
     public AudioClip gameoverSound;
 
     public TextMeshProUGUI coinTMPro;
@@ -49,6 +51,23 @@ public class GameManager : MonoBehaviour
         AudioSource.PlayClipAtPoint(coinSound, camera.transform.position, 0.5f);
         coinCount++;
         coinTMPro.text = coinCount.ToString();
+    }
+    public void onBoosterCollide(GameObject boosterGO)
+    {
+        Instantiate(boosterParticle, boosterGO.gameObject.transform.position, Random.rotation);
+        Destroy(boosterGO.gameObject);
+        AudioSource.PlayClipAtPoint(boosterSound, camera.transform.position, 0.7f);
+
+        GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
+        foreach (GameObject item in obstacles)
+        {
+            item.SetActive(false);
+        }
+        GameObject[] cars = GameObject.FindGameObjectsWithTag("Car");
+        foreach (GameObject item in cars)
+        {
+            item.SetActive(false);
+        }
     }
 
     public void CounterUpdate()

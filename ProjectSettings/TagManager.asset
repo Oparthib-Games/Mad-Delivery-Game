@@ -9,6 +9,7 @@ TagManager:
   - Lane Trigger
   - Car
   - Slope
+  - Booster
   layers:
   - Default
   - TransparentFX

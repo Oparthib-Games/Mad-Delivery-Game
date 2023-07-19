@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Temple Run Sandbox.unity
+    path: Assets/Scenes/Main Scene.unity
     guid: 8687acdf77681ed49849db38674bf5fd
   m_configObjects: {}
