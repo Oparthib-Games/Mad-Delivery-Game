@@ -90,6 +90,10 @@ public class Bike : MonoBehaviour
         {
             SlopeJump();
         }
+        if (other.gameObject.CompareTag("Fuel"))
+        {
+            gameManager.AddFuel(other.gameObject, 100);
+        }
     }
 
     IEnumerator BoosterEffect()

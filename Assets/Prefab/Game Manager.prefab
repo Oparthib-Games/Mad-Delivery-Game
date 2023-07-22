@@ -142,16 +142,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinCount: 0
+  fuel: 100
+  fuelDecreaseRate: 0.5
   coinParticle: {fileID: 1249263037299864, guid: 91383577fe0767d41818c5ba5d3e1624,
     type: 3}
   coinSound: {fileID: 8300000, guid: 3a995e8d3767c7d45be5b6004ae57fc7, type: 3}
-  boosterParticle: {fileID: 0}
-  boosterSound: {fileID: 0}
+  boosterParticle: {fileID: 1249263037299864, guid: abed887dc7e3f8c4abe06d760a186d50,
+    type: 3}
+  boosterSound: {fileID: 8300000, guid: d04ca7ef222d1c84fbd6154c788f622c, type: 3}
+  fuelParticle: {fileID: 1249263037299864, guid: 4daf153e941b7b94cad5cd9a126122c7,
+    type: 3}
   gameoverSound: {fileID: 8300000, guid: 8fee9a4c29bf75a47a81ad5b90441eca, type: 3}
   coinTMPro: {fileID: 0}
   finalScoreTMPro: {fileID: 0}
   startingCounterTMPro: {fileID: 0}
   gameOverPanel: {fileID: 0}
+  gameOverTextTMPro: {fileID: 0}
+  startPanel: {fileID: 0}
+  fuelSliderGO: {fileID: 0}
+  sliderBase: {r: 0, g: 0.80392164, b: 0.043137256, a: 1}
+  sliderYellow: {r: 1, g: 0.78347236, b: 0.30566037, a: 1}
+  sliderRed: {r: 1, g: 0.36775538, b: 0.29622638, a: 1}
+  isPlayClicked: 0
   isGameStarted: 0
   isGameOver: 0
   startingCounter: 3
