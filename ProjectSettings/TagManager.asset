@@ -11,6 +11,7 @@ TagManager:
   - Slope
   - Booster
   - Fuel
+  - Cheez Coin
   layers:
   - Default
   - TransparentFX

@@ -160,6 +160,7 @@ MonoBehaviour:
   gameOverTextTMPro: {fileID: 0}
   startPanel: {fileID: 0}
   fuelSliderGO: {fileID: 0}
+  controlPanel: {fileID: 0}
   sliderBase: {r: 0, g: 0.80392164, b: 0.043137256, a: 1}
   sliderYellow: {r: 1, g: 0.78347236, b: 0.30566037, a: 1}
   sliderRed: {r: 1, g: 0.36775538, b: 0.29622638, a: 1}
@@ -168,15 +169,9 @@ MonoBehaviour:
   isGameOver: 0
   startingCounter: 3
   lanes:
-  - {fileID: 5045243695601211711, guid: eb3f4b270d50a6448a44e52987e068cb, type: 3}
-  - {fileID: 2811899975772899681, guid: c99d76146f7e39143953fb824274637e, type: 3}
-  - {fileID: 340301693111140091, guid: 22b7997e0e3a62946a9949d854fa4c50, type: 3}
-  - {fileID: 6986423811421550515, guid: b918e61e9cd831d4e846ac885620b6c3, type: 3}
-  - {fileID: 8453963680540634008, guid: c4fcbae09de2ee945b0cc9e5144cda19, type: 3}
+  - {fileID: 4197445214097946134, guid: 3e0b181fde1cd0e46a1d1fdab696c555, type: 3}
   activeLanes:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   laneParent: {fileID: 0}
+  nextLaneZPos: 200

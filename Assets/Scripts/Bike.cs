@@ -8,6 +8,7 @@ public class Bike : MonoBehaviour
     public float sideSpeed = 5f;
     public float slideSpeed = 5f;
     public float slopeJumpForce = 5f;
+    public float xClamp = 1;
 
     float forwardSpeedMultiplier = 1f;
 
@@ -22,6 +23,12 @@ public class Bike : MonoBehaviour
     public GameObject[] Main_Smokes;
     public GameObject[] Booster_Smokes;
 
+    public bool useManual;
+    float manualH;
+    float H;
+    float horizontal;
+    float vertical;
+
     void Start()
     {
         ANIM = GetComponent<Animator>();
@@ -31,6 +38,8 @@ public class Bike : MonoBehaviour
 
     void Update()
     {
+        H = useManual ? manualH : InputManager.H;
+
         if (!gameManager.isGameStarted || gameManager.isGameOver) return;
         Movement();
         Slide();
@@ -48,8 +57,8 @@ public class Bike : MonoBehaviour
         //transform.Translate(Vector3.right * sideSpeed * InputManager.H * Time.deltaTime);
 
 
-        float horizontal = sideSpeed * InputManager.H;
-        float vertical = forwardSpeed * forwardSpeedMultiplier;
+        horizontal = sideSpeed * H;
+        vertical = forwardSpeed * forwardSpeedMultiplier;
         Vector3 movement = new Vector3(horizontal, 0f, vertical) * Time.deltaTime;
         transform.Translate(movement);
 
@@ -62,14 +71,18 @@ public class Bike : MonoBehaviour
 
     void UpdateAnimation()
     {
-        ANIM.SetFloat("Lean", InputManager.H);
+        ANIM.SetFloat("Lean", H);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Coin"))
         {
-            gameManager.onCoinCollide(other.gameObject);
+            gameManager.onCoinCollide(1, other.gameObject);
+        }
+        if(other.gameObject.CompareTag("Cheez Coin"))
+        {
+            gameManager.onCoinCollide(5, other.gameObject);
         }
         if(other.gameObject.CompareTag("Booster"))
         {
@@ -150,5 +163,10 @@ public class Bike : MonoBehaviour
             RB.AddForce(new Vector3(0, 1, 1) * slopeJumpForce);
             isJumped = true;
         }
+    }
+
+    public void ManualInput(int value)
+    {
+        manualH = value;
     }
 }

@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI gameOverTextTMPro;
     public GameObject startPanel;
     public GameObject fuelSliderGO;
+    public GameObject controlPanel;
     Slider fuelSlider;
     Image slideFillImage;
 
@@ -42,7 +43,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> lanes;
     public List<GameObject> activeLanes;
     public GameObject laneParent;
-    float nextLaneZPos = 100;
+    public float nextLaneZPos = 200;
 
     void Start()
     {
@@ -54,6 +55,7 @@ public class GameManager : MonoBehaviour
         gameOverPanel.SetActive(false);
         fuelSliderGO.SetActive(false);
         startPanel.SetActive(true);
+        controlPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -82,15 +84,16 @@ public class GameManager : MonoBehaviour
         startingCounterTMPro.gameObject.SetActive(true);
         startPanel.SetActive(false);
         fuelSliderGO.SetActive(true);
+        controlPanel.SetActive(true);
         StartCoroutine(DecreaseFuel());
     }
 
-    public void onCoinCollide(GameObject coinGO)
+    public void onCoinCollide(int amount, GameObject coinGO)
     {
         Instantiate(coinParticle, coinGO.gameObject.transform.position, Random.rotation);
         Destroy(coinGO.gameObject);
         AudioSource.PlayClipAtPoint(coinSound, camera.transform.position, 0.5f);
-        coinCount++;
+        coinCount += amount;
         coinTMPro.text = coinCount.ToString();
     }
     public void onBoosterCollide(GameObject boosterGO)
@@ -136,7 +139,7 @@ public class GameManager : MonoBehaviour
         GameObject laneGO = Instantiate(lanes[randomIndex], new Vector3(0, 0, nextLaneZPos), Quaternion.identity) as GameObject;
         laneGO.transform.SetParent(laneParent.transform);
         activeLanes.Add(laneGO);
-        nextLaneZPos += 20;
+        nextLaneZPos += 100;
     }
 
     public void GameOver(string gameover_type = "basic")
@@ -150,6 +153,7 @@ public class GameManager : MonoBehaviour
         AudioSource.PlayClipAtPoint(gameoverSound, camera.transform.position, 0.5f);
         finalScoreTMPro.text = coinCount.ToString();
         gameOverPanel.SetActive(true);
+        controlPanel.SetActive(false);
     }
 
     public void ReloadScene()
@@ -179,7 +183,10 @@ public class GameManager : MonoBehaviour
 
     void UpdateFuelSlider()
     {
-        float fuelSliderValue = fuel / 100;
-        fuelSlider.value = fuelSliderValue;
+        if(!isGameOver && isGameStarted)
+        {
+            float fuelSliderValue = fuel / 100;
+            fuelSlider.value = fuelSliderValue;
+        }
     }
 }
