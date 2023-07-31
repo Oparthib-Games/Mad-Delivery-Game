@@ -1,0 +1,178 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5084467382822876352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5084467382822876358}
+  - component: {fileID: 5084467382822876353}
+  - component: {fileID: 5084467382822876359}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5084467382822876358
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5084467382822876352}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &5084467382822876353
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5084467382822876352}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 68ff3904033ca594dacf047d4043289a, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5084467382822876359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5084467382822876352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b883c1fd68b8764ea757af1ad6a2906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinCount: 0
+  fuel: 100
+  fuelDecreaseRate: 0.005
+  coinParticle: {fileID: 1249263037299864, guid: 91383577fe0767d41818c5ba5d3e1624,
+    type: 3}
+  coinSound: {fileID: 8300000, guid: 3a995e8d3767c7d45be5b6004ae57fc7, type: 3}
+  boosterParticle: {fileID: 1249263037299864, guid: abed887dc7e3f8c4abe06d760a186d50,
+    type: 3}
+  boosterSound: {fileID: 8300000, guid: d04ca7ef222d1c84fbd6154c788f622c, type: 3}
+  fuelParticle: {fileID: 1249263037299864, guid: 4daf153e941b7b94cad5cd9a126122c7,
+    type: 3}
+  gameoverSound: {fileID: 8300000, guid: 8fee9a4c29bf75a47a81ad5b90441eca, type: 3}
+  coinTMPro: {fileID: 0}
+  finalScoreTMPro: {fileID: 0}
+  startingCounterTMPro: {fileID: 0}
+  gameOverPanel: {fileID: 0}
+  gameOverTextTMPro: {fileID: 0}
+  startPanel: {fileID: 0}
+  fuelSliderGO: {fileID: 0}
+  controlPanel: {fileID: 0}
+  sliderBase: {r: 0, g: 0.80392164, b: 0.043137256, a: 1}
+  sliderYellow: {r: 1, g: 0.78347236, b: 0.30566037, a: 1}
+  sliderRed: {r: 1, g: 0.36775538, b: 0.29622638, a: 1}
+  isPlayClicked: 0
+  isGameStarted: 0
+  isGameOver: 0
+  startingCounter: 3
+  lanes:
+  - {fileID: 7135121177821666655, guid: 81c7017ec7ca9eb40991da957b8be14a, type: 3}
+  activeLanes:
+  - {fileID: 0}
+  - {fileID: 0}
+  laneParent: {fileID: 0}
+  nextLaneZPos: 117
+  nextLaneZPosIncrement: 39
