@@ -24,10 +24,13 @@ public class Bike : MonoBehaviour
     public GameObject[] Booster_Smokes;
 
     public bool useManual;
+    public bool useContiniousMovement = true;
     float manualH;
     float H;
     float horizontal;
     float vertical;
+
+    [SerializeField] float nextStaticHPos;
 
     void Start()
     {
@@ -38,10 +41,19 @@ public class Bike : MonoBehaviour
 
     void Update()
     {
-        H = useManual ? manualH : InputManager.H;
+        InputHandle();
 
         if (!gameManager.isGameStarted || gameManager.isGameOver) return;
-        Movement();
+
+        if(useContiniousMovement)
+        {
+            ContinousMovement();
+        } else
+        {
+            StaticMovement();
+        }
+
+
         Slide();
         UpdateAnimation();
     }
@@ -51,7 +63,61 @@ public class Bike : MonoBehaviour
         if (!gameManager.isGameStarted || gameManager.isGameOver) return;
     }
 
-    void Movement()
+    void InputHandle()
+    {
+        if(useContiniousMovement)
+        {
+            H = useManual ? manualH : InputManager.H;
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                H = 1;
+
+                if(transform.position.x > -0.1f && transform.position.x < 0.1f)
+                {
+                    nextStaticHPos = 1;
+                } else if(transform.position.x < 0)
+                {
+                    nextStaticHPos = 0;
+                } else if (transform.position.x > 0)
+                {
+                    nextStaticHPos = 1;
+                }
+            } else if (Input.GetKeyDown(KeyCode.A))
+            {
+                H = -1;
+
+                if (transform.position.x > -0.1f && transform.position.x < 0.1f)
+                {
+                    nextStaticHPos = -1;
+                }
+                else if (transform.position.x < 0)
+                {
+                    nextStaticHPos = -1;
+                }
+                else if (transform.position.x > 0)
+                {
+                    nextStaticHPos = 0;
+                }
+            }
+        }
+    }
+    void StaticMovement()
+    {
+        if(Mathf.Abs(transform.position.x - nextStaticHPos) <= 0.05f)
+        {
+            H = 0;
+        }
+
+        horizontal = sideSpeed * H;
+        vertical = forwardSpeed * forwardSpeedMultiplier;
+        Vector3 movement = new Vector3(horizontal, 0f, vertical) * Time.deltaTime;
+        transform.Translate(movement);
+    }
+
+    void ContinousMovement()
     {
         //transform.Translate(Vector3.forward * forwardSpeed * forwardSpeedMultiplier * Time.deltaTime);
         //transform.Translate(Vector3.right * sideSpeed * InputManager.H * Time.deltaTime);
