@@ -59,7 +59,6 @@ public class GameManager : MonoBehaviour
         controlPanel.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(fuel > 50)
@@ -85,7 +84,7 @@ public class GameManager : MonoBehaviour
         startingCounterTMPro.gameObject.SetActive(true);
         startPanel.SetActive(false);
         fuelSliderGO.SetActive(true);
-        controlPanel.SetActive(true);
+        //controlPanel.SetActive(true);
         StartCoroutine(DecreaseFuel());
     }
 

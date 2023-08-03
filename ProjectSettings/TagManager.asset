@@ -12,6 +12,9 @@ TagManager:
   - Booster
   - Fuel
   - Cheez Coin
+  - Center Lane
+  - Right Lane
+  - Left Lane
   layers:
   - Default
   - TransparentFX

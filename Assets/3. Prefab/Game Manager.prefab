@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5084467382822876358}
   - component: {fileID: 5084467382822876353}
+  - component: {fileID: 6236657134343029563}
   - component: {fileID: 5084467382822876359}
   m_Layer: 0
   m_Name: Game Manager
@@ -129,6 +130,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6236657134343029563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5084467382822876352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe6c2e188d01af4aa7335fcb849badb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  touchStartPos: {x: 0, y: 0, z: 0}
+  touchEndPos: {x: 0, y: 0, z: 0}
+  isMouseTouch: 1
 --- !u!114 &5084467382822876359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,5 +190,5 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   laneParent: {fileID: 0}
-  nextLaneZPos: 117
-  nextLaneZPosIncrement: 39
+  nextLaneZPos: 324
+  nextLaneZPosIncrement: 162

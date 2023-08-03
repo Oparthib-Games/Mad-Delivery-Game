@@ -31,6 +31,7 @@ public class Bike : MonoBehaviour
     float vertical;
 
     [SerializeField] float nextStaticHPos;
+    [SerializeField] int currLane;
 
     void Start()
     {
@@ -53,7 +54,6 @@ public class Bike : MonoBehaviour
             StaticMovement();
         }
 
-
         Slide();
         UpdateAnimation();
     }
@@ -73,45 +73,72 @@ public class Bike : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.D))
             {
-                H = 1;
-
-                if(transform.position.x > -0.1f && transform.position.x < 0.1f)
-                {
-                    nextStaticHPos = 1;
-                } else if(transform.position.x < 0)
-                {
-                    nextStaticHPos = 0;
-                } else if (transform.position.x > 0)
-                {
-                    nextStaticHPos = 1;
-                }
-            } else if (Input.GetKeyDown(KeyCode.A))
+                Right();
+            }
+            else if (Input.GetKeyDown(KeyCode.A))
             {
-                H = -1;
-
-                if (transform.position.x > -0.1f && transform.position.x < 0.1f)
-                {
-                    nextStaticHPos = -1;
-                }
-                else if (transform.position.x < 0)
-                {
-                    nextStaticHPos = -1;
-                }
-                else if (transform.position.x > 0)
-                {
-                    nextStaticHPos = 0;
-                }
+                Left();
             }
         }
     }
+
+    public void Right()
+    {
+        H = 1;
+
+        if (transform.position.x > -0.5f && transform.position.x < 0.5f)
+        {
+            nextStaticHPos = 1;
+        }
+        else if (transform.position.x < 0)
+        {
+            nextStaticHPos = 0;
+        }
+        else if (transform.position.x > 0)
+        {
+            nextStaticHPos = 1;
+        }
+    }
+
+    public void Left()
+    {
+        H = -1;
+
+        if (transform.position.x > -0.5f && transform.position.x < 0.5f)
+        {
+            nextStaticHPos = -1;
+        }
+        else if (transform.position.x < 0)
+        {
+            nextStaticHPos = -1;
+        }
+        else if (transform.position.x > 0)
+        {
+            nextStaticHPos = 0;
+        }
+    }
+
     void StaticMovement()
     {
-        if(Mathf.Abs(transform.position.x - nextStaticHPos) <= 0.05f)
+        //if(Mathf.Abs(transform.position.x - nextStaticHPos) <= 0.12f)
+        //{
+        //    H = 0;
+        //}
+        if(nextStaticHPos != 0)
         {
-            H = 0;
+            if (currLane == nextStaticHPos)
+            {
+                H = 0;
+            }
+        } else
+        {
+            if (currLane == nextStaticHPos && Mathf.Abs(transform.position.x - nextStaticHPos) <= 0.15f)
+            {
+                H = 0;
+            }
         }
 
-        horizontal = sideSpeed * H;
+        horizontal = sideSpeed * H * 2;
         vertical = forwardSpeed * forwardSpeedMultiplier;
         Vector3 movement = new Vector3(horizontal, 0f, vertical) * Time.deltaTime;
         transform.Translate(movement);
@@ -142,34 +169,48 @@ public class Bike : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Coin"))
+        if (other.gameObject.CompareTag("Center Lane"))
+        {
+            currLane = 0;
+        }
+        else if (other.gameObject.CompareTag("Right Lane"))
+        {
+            currLane = 1;
+        }
+        else if (other.gameObject.CompareTag("Left Lane"))
+        {
+            currLane = -1;
+        }
+
+
+        if (other.gameObject.CompareTag("Coin"))
         {
             gameManager.onCoinCollide(1, other.gameObject);
         }
-        if(other.gameObject.CompareTag("Cheez Coin"))
+        else if (other.gameObject.CompareTag("Cheez Coin"))
         {
             gameManager.onCoinCollide(5, other.gameObject);
         }
-        if(other.gameObject.CompareTag("Booster"))
+        else if (other.gameObject.CompareTag("Booster"))
         {
             gameManager.onBoosterCollide(other.gameObject);
 
             StartCoroutine(BoosterEffect());
         }
-        if(other.gameObject.CompareTag("Lane Trigger"))
+        else if (other.gameObject.CompareTag("Lane Trigger"))
         {
             Destroy(other.gameObject);
             gameManager.SpawnLane();
         }
-        if(other.gameObject.CompareTag("Obstacle") || other.gameObject.CompareTag("Car"))
+        else if (other.gameObject.CompareTag("Obstacle") || other.gameObject.CompareTag("Car"))
         {
             gameManager.GameOver();
         }
-        if (other.gameObject.CompareTag("Slope"))
+        else if (other.gameObject.CompareTag("Slope"))
         {
             SlopeJump();
         }
-        if (other.gameObject.CompareTag("Fuel"))
+        else if (other.gameObject.CompareTag("Fuel"))
         {
             gameManager.AddFuel(other.gameObject, 100);
         }
